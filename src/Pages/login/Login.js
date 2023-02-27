@@ -24,10 +24,10 @@ const Login = () => {
               password: Yup.string().min(5, 'senha precisa ter 5 caracteres')
           })
           await schema.validate(data, { abortEarly: false})
-          await axios.post("http://localhost:3333/usuarios", data)
+          await axios.post(`http://localhost:3333/pessoas`, data)
           .then(response => {
               toast.success("Usuário salvo com sucesso")
-              navigate(`/usuarios/${response.data.id}`);
+              navigate(`http://localhost:3333/pessoas/${response.data.id}`);
           })
           .catch(erro => {
               toast.error("Usuário nao salvo no banco de dados!")

@@ -10,7 +10,7 @@ function Navbar(){
             <Container className="container-fluid">
                 <div className="row justify-content-center">
                     <div className="col-sm col-md-6">
-                        <a className="navbar-brand" href="/pessoas">
+                        <a className="navbar-brand" href="/Login">
                         <img src={IconeDeUsuarioNavbar} alt="logo"/>
                         </a>
                     </div>
@@ -30,7 +30,7 @@ width: 100%;
 height: 125px;
 background-size: contain;
 background-position: center;
-justify-content: center;
+
 margin-top: 0;
 background-color: #5c5c5c;
     img{

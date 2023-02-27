@@ -4,9 +4,9 @@ import { toast } from "react-toastify"
 
 
 const Pessoas = () => {
-  const [usuarios, setPessoas] = useState([])
+  const [pessoas, setPessoas] = useState([])
   const listarPessoas = () => {
-    axios.get("http://localhost:3333/usuarios")
+    axios.get(`http://localhost:3333/pessoas`)
     .then(response => {
       setPessoas(response.data)
     })
@@ -24,14 +24,14 @@ const Pessoas = () => {
           <h1>Pessoas</h1>
         </div>
           <div>
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">username</th>
                   <th scope="col">password</th>
                 </tr>
               </thead>
-                <tbody class="table-group-divider">{usuarios.map(item =>(
+                <tbody class="table-group-divider">{pessoas.map(item =>(
                   <tr key={item.id}>
                     <td>{item.username}</td>
                     <td>{item.password}</td>

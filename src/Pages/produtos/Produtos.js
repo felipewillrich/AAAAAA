@@ -4,7 +4,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 import styled from 'styled-components'
 import { BsFillTrashFill } from 'react-icons/bs'
-import api from '../../services/api'
 import { toast } from 'react-toastify'
 import {FiSearch} from 'react-icons/fi'
 
@@ -21,7 +20,7 @@ const Produtos = () => {
 
 
     const listarProdutos = useCallback(() => {
-        axios.get('http://localhost:3333/produtos')
+        axios.get(`http://localhost:3333/produtos`)
             .then(response => {
                 setLista(response.data)
 
@@ -30,7 +29,7 @@ const Produtos = () => {
     }, [])
 
     const removerProduto = useCallback(async () => {
-        await api.delete(`/produtos/${produtoSelecionado.id}`)
+        await axios.delete(`http://localhost:3333/produtos/${produtoSelecionado.id}`)
             .then(() => {
                 toast.success('Produto excluido com sucesso!')
                 listarProdutos()
@@ -79,7 +78,7 @@ const Produtos = () => {
                             {lista.map(produto => (
                                 <Linha key={produto.id} onClick={(event) => {
                                     if (event.target.innerText !== undefined) {
-                                        navigate(`/produtos/${produto.id}`)
+                                        navigate(`http://localhost:3333/produtos/${produto.id}`)
                                     }
                                 }}>
                                     <td>{produto.marca}</td>

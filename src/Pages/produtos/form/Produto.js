@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState, useRef } from "react";
 import styled from "styled-components";
 import * as Yup from 'yup';
 import { Form } from "@unform/web";
-import InputLabel from "../../../Componentes/unform/input-label";
+import InputLabel from "../../../Componentes/unform/input-label/index";
 import SelectLabel from "../../../Componentes/unform/select-label";
 import InputCurrencyLabel from "../../../Componentes/unform/input-currency-label";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const Produto = () => {
   ]
 
   const getProduto = useCallback(async id => {
-      await axios.get(`/produtos/${id}`)
+      await axios.get(`http://localhost:3333/produtos/${id}`)
         .then(response => {
           setProduto(response.data)
 
@@ -40,16 +40,16 @@ console.log(tipo);
   }, [])
 
   const salvarProduto = useCallback(async data => {
-    await axios.post('/produtos', data)
+    await axios.post(`http://localhost:3333/produtos`, data)
       .then(response => {
           toast.success("Produto salvo com sucesso!");
 
-          navigate(`/produtos/${response.data.id}`)
+          navigate(`http://localhost:3333/produtos/${response.data.id}`)
       })
   }, [])
 
   const atualizarProduto = useCallback(async data => {
-    await axios.put(`/produtos/${produto.id}`, data)
+    await axios.put(`http://localhost:3333/produtos/${produto.id}`, data)
       .then(response => {
         toast.success("Produto Atualizado com sucesso!");
       }).catch(erro => console.log(erro))
@@ -84,8 +84,8 @@ console.log(tipo);
       const errorMessages = {}
 
       if (error instanceof Yup.ValidationError) {
-        error.inner.forEach(err => {
-            errorMessages[err.path] = err.message
+        error.inner.forEach(error => {
+            errorMessages[error.path] = error.message
         })
 
         formRef.current.setErrors(errorMessages)
@@ -111,17 +111,17 @@ console.log(tipo);
           <div className="col-sm col-md-6">
             <Form ref={formRef} initialData={produto} onSubmit={submit}>
               <div>
-                <InputLabel label="marca" name="marca" />
+                <InputLabel label="Marca" name="marca" />
               </div>
               
               <div className='mt-3'>
-                <InputLabel label="descrição" name="descricao" />
+                <InputLabel label="Descrição" name="descricao" />
               </div>
 
               <div className="row mt-3">
                 <div className="col-md-6">
                   <SelectLabel 
-                    label="valor" 
+                    label="Valor" 
                     name="valor" 
                     options={options} 
                     value={tipoSelecionado} 
@@ -129,11 +129,11 @@ console.log(tipo);
                 </div>
                 
                 <div className="col ">
-                  <InputLabel label="quantidade" name="quantidade" />
+                  <InputLabel label="Quantidade" name="quantidade" />
                 </div>
                 
                 <div className="col ">
-                  <InputCurrencyLabel label="valor" name="valor" />
+                  <InputCurrencyLabel label="Valor" name="valor" />
                 </div>
               </div>
 

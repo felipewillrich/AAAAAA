@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "./Pages/login/Login";
-import Home from "./Pages/home/Home"
-import Produtos from "./Pages/produtos/Produtos.js";
+import Home from "./Pages/home/Home";
+import Produtos from "./Pages/produtos/Produtos";
 import PaginaNaoEncontrada from "./Pages/notfound404/PaginaNaoEncontrada"
-import Pessoas from "./Pages/pessoas/Pessoas"
-import Produto from "./Pages/produtos/form/Produto"
+import Pessoas from "./Pages/pessoas/Pessoas";
+import Produto from "./Pages/produtos/form/Produto";
 
-export function RotasPrivadas () {
+export const Rotas = () => {
     
     return(
         <Routes>
@@ -20,4 +20,4 @@ export function RotasPrivadas () {
         </Routes>
     );
 }
-export default RotasPrivadas
+export default Rotas
