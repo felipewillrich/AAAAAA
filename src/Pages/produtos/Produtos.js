@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useCallback, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
@@ -7,7 +8,8 @@ import api from '../../services/api'
 import { toast } from 'react-toastify'
 import {FiSearch} from 'react-icons/fi'
 
-function Produtos() {
+
+const Produtos = () => {
 
     const navigate = useNavigate()
 
@@ -24,7 +26,7 @@ function Produtos() {
                 setLista(response.data)
 
                 setTotal(response.data.length)
-            });
+            })
     }, [])
 
     const removerProduto = useCallback(async () => {
@@ -39,18 +41,18 @@ function Produtos() {
 
     useEffect(() => {
         listarProdutos()
-    },[listarProdutos])
+    },[])
     return (
-        <PContainer className="text-center">
+        <ProdutosContainer className="text-center">
             <h1>PRODUTOS</h1>
 
             <div className="row justify-content-center mt-5 mb-3">
                 <div className="col-sm-6 col-md-2 d-grid">
-                    <Link className='btn btn-primary' to="/produto">NOVO PRODUTO</Link>
+                    <Link className='btn btn-primary' to="/produtos/novo">NOVO PRODUTO</Link>
                 </div>
                 
                 <div className="col-sm-6 col-md-2 d-grid">
-                    <button className='btn btn-primary' > <FiSearch size={15}/>LOCALIZAR</button>
+                    <button className='btn btn-primary' > <FiSearch size={25}/>LOCALIZAR</button>
                 </div>
             </div>
 
@@ -108,20 +110,20 @@ function Produtos() {
                         <div className="modal-footer">
                             <button type="button" className="btn btn-primary col-4" data-bs-dismiss="modal"
                                 onClick={() => removerProduto()}>Sim</button>
-                            <button to="/" type="button" className="btn btn-danger">Cancelar</button>
+                            <button type="button" className="btn btn-danger">Cancelar</button>
                         </div>
                     </div>
                 </div>
             </div>
             </div>
-        </PContainer>
+        </ProdutosContainer>
     )
 }
 
 export default Produtos
 
 
-export const PContainer = styled.div`
+export const ProdutosContainer = styled.div`
     h1 {
        color: #5C5C5C;
        margin-top: 30px;

@@ -1,47 +1,48 @@
 import axios from "axios"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
 
-function Pessoas() {
 
-    const [lista, setLista] = useState([])
-  
-  
-    const listarPessoas = useCallback(() => {
-      axios.get(`http://localhost:3333/pessoas`)
-        .then(response => setLista(response.data))
-    }, [])
-  
-  
-    useEffect(() => {
-      listarPessoas()
+const Pessoas = () => {
+  const [usuarios, setPessoas] = useState([])
+  const listarPessoas = () => {
+    axios.get("http://localhost:3333/usuarios")
+    .then(response => {
+      setPessoas(response.data)
     })
-  return (
-    <div>
-        <h1>Pessoas</h1>
-        <div>
-        <div className='col'>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Telefone</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lista.map(pessoa => (
-                <tr key={pessoa.id}>
-                  <td>{pessoa.id}</td>
-                  <td>{pessoa.nome}</td>
-                  <td>{pessoa.telefone}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    .catch(erro => {
+      toast.error('nenhum usuario encontrado')
+    })
+  }
+  useEffect(() => {
+    listarPessoas()
+  },[])
+  return(
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-sm col-md-6">
+          <h1>Pessoas</h1>
         </div>
+          <div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">username</th>
+                  <th scope="col">password</th>
+                </tr>
+              </thead>
+                <tbody class="table-group-divider">{usuarios.map(item =>(
+                  <tr key={item.id}>
+                    <td>{item.username}</td>
+                    <td>{item.password}</td>
+                  </tr>))}
+                  
+                </tbody>
+            </table>
+          </div>
       </div>
+      
     </div>
   )
 }
-
 export default Pessoas

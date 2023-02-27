@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Image from "../notfound404/Erro.png";
 
@@ -7,8 +6,8 @@ function PaginaNaoEncontrada () {
     return(
         <NContainer className="container">
             <div className="row">
-                <div className="col-sm col-md-2">
-                    <Link to="/" className="btn btn-primary">voltar a pagina inicial</Link>
+                <div className="col-sm col-md-12">
+                    <a href="/" class="btn btn-primary" role="button">voltar a pagina inicial</a>
                 </div>
             </div>
            
@@ -32,9 +31,17 @@ export const NContainer = styled.div`
 }
 .btn-primary {
     margin-left: 7rem;
+    margin-top: 11rem;
     background: none !important;
+    border: none !important;
     color: #FF720C;
-    text-shadow: 2px 2px 5px #FF720C;
+    text-shadow: 2px 2px 5px #fff;
+    :hover{
+        background-color: #5c5c5c;
+        a{
+            color: #fff;
+        }
+    }
 }
 
 `

@@ -1,50 +1,42 @@
-
+import React from "react"
 import styled from "styled-components"
 import IconeDeUsuarioNavbar from "../../icones/IconeDeUsuarioNavbar.png"
-
+import Image from "../navbar/LOGOLARANJA.png"
 
 function Navbar(){
     return(
     <header>
         <nav className="navbar">
-            <Container className="container">
-                <div className="row">
-                    <div className="col-sm col-md-6 ">
-                        <div className="navbar-brand" href="/Login">
-                        <p className="h1">CLOTHING
-                        </p>
+            <Container className="container-fluid">
+                <div className="row justify-content-center">
+                    <div className="col-sm col-md-6">
+                        <a className="navbar-brand" href="/pessoas">
                         <img src={IconeDeUsuarioNavbar} alt="logo"/>
+                        </a>
                     </div>
                 </div>
-                    </div>
-                
             </Container>
         </nav>
     </header>
+    
     )
 }
 export default Navbar
 
 export const Container = styled.div`
-margin-top: 0;
-max-width: 100%;
-background-color: #5C5C5C;
-display: flex;
+background-image: url(${Image});
+background-repeat: no-repeat;
+width: 100%;
+height: 125px;
+background-size: contain;
+background-position: center;
 justify-content: center;
+margin-top: 0;
+background-color: #5c5c5c;
     img{
         max-width: 100px;
-        margin-left: 35rem;
-        position: absolute;
-        margin-top: -6rem;
-        
+        margin-left: 45rem;
+        position: relative;
+        margin-top: 0;
 }
-.h1{
-    font-size: 55px;
-    color:  #ffff; 
-    justify-content: end;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    
-}
-
 `

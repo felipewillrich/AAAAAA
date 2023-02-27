@@ -1,65 +1,62 @@
+
 import { Form } from "@unform/web";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Image  from "./Login.png";
 import * as Yup from "yup";
 import InputLabel from "../../Componentes/unform/input-label"
-import { useAuth } from '../../contexto/AuthContext'
 import  Logo  from "../login/Logo.png"
+import { toast } from "react-toastify";
+import axios from "axios";
 
-function Login() {
-
-  const { Login } = useAuth()
+const Login = () => {
 
   const formRef = useRef(null)
-
+  
   const navigate = useNavigate()
-
-  const fazerLogin = async (user) => {
-    await Login(user)
-  }
-
-  const submit = useCallback(
-    async (data) => {
-      try {
-        formRef.current.setErrors({})
-
-        const schema = Yup.object().shape({
-          username: Yup.string()
-            .email('Digite um e-mail válido')
-            .required('E-mail é obrigatório'),
-          password: Yup.string().required('Senha é obrigatório'),
-        })
-
-        await schema.validate(data, { abortEarly: false })
-
-        fazerLogin(data)
-      } catch (erro) {
-        if (erro instanceof Yup.ValidationError) {
-          const errorMessages = {}
-
-          erro.inner.forEach((error) => {
-            if (error.path) errorMessages[error.path] = error.message
+  
+  const submit = async (data) => {
+      try{
+          formRef.current.setErrors({})
+          const schema = Yup.object().shape({
+              username: Yup.string().required("Nome é obrigatorio"),
+              password: Yup.string().min(5, 'senha precisa ter 5 caracteres')
           })
-
-          formRef.current?.setErrors(errorMessages)
-        }
+          await schema.validate(data, { abortEarly: false})
+          await axios.post("http://localhost:3333/usuarios", data)
+          .then(response => {
+              toast.success("Usuário salvo com sucesso")
+              navigate(`/usuarios/${response.data.id}`);
+          })
+          .catch(erro => {
+              toast.error("Usuário nao salvo no banco de dados!")
+              console.log(erro);
+          })
+  
+      }catch(error){
+          if (error instanceof Yup.ValidationError){
+              
+              const messages = {}
+              error.inner.forEach(erro => {
+                  messages[erro.path] = erro.message
+              });
+  
+              formRef.current.setErrors(messages)
+          }
       }
-    },
-    [navigate]
-  )
+  }
     return (
         <LContainer className="container">
            
-           <div className="row">
+           <div className="row justify-content-center">
         <div className="col-sm col-md-3 card">
           <div>
             <img src={Logo} alt="Logo" />
           </div>
 
-          <Form ref={formRef} onSubmit={submit} noValidate >
-            <div className="mt-5">
+          <Form ref={formRef} onSubmit={submit} >
+            <div className="mt-2">
               <InputLabel  name="username" label="Usuário" />
             </div>
 
@@ -67,9 +64,8 @@ function Login() {
               <InputLabel name="password" label="Senha" type="password"/>
             </div>
 
-            <Link className="link" to="/Home">Esqueceu sua senha?</Link>
-            <button
-              className="btn btn-secondary btn-block  mt-5" type="submit">
+            <Link className="link" to="/">Esqueceu sua senha?</Link>
+            <button className="btn btn-secondary btn-block" type="submit">
               Entrar
             </button>
           </Form>
@@ -87,30 +83,29 @@ width: 100%;
 height: 900px;
 background-size: contain;
 background-position: center;
-background-color: #111111;
-color: #fff;
+justify-content: center;
+margin-top: -3rem;
 
 img {
-  max-width: 200px;
+  max-width: 170px;
   
 }
 .card {
-    display: flex;
+  background: rgba(5, 175, 80, 0.3);
     flex-direction: column;
     align-content: center;
     align-items: center;
-    background: #5C5C5C;
-    padding: 30px;
-    margin-top: 10px;
+    padding: 25px;
+    margin-top: 20rem;
+    margin-left: 25rem;
   
   button {
     background: #FF720C;
-    height: 25px;
+    height: 35px;
     width: 100%;
 }
 .link{
     font-size: 10px;
-    margin-top: 0;
     color: #fff;
 }
 

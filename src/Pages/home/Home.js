@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 function Home() {
     return(
         <Container className="container">
-            <div className="row">
+            <div className="row justify-content-center">
                 <div className="col-sm col-md-4">
                     <div className="card">
                         <Link to="/pedidos" className="card-body">
@@ -21,7 +21,7 @@ function Home() {
                 </div>
                 <div className="col-sm col-md-4">
                     <div className="card">
-                        <Link to="/Pessoas" className="card-body">
+                        <Link to="/pessoas" className="card-body">
                         <img src={PessoasIcone} className="card-img-top" alt="Pessoas Icone"/>
                             <h5 className="card-title">PESSOAS</h5>
                         </Link>
@@ -29,7 +29,7 @@ function Home() {
                 </div>
                     <div className="col-sm col-md-4">
                         <div className="card">
-                        <Link to="/Produtos" className="card-body">
+                        <Link to="/produtos" className="card-body">
                         <img src={ProdutosIcone} className="card-img-top" alt="Produtos Icone"/>
                             <h5 className="card-title">PRODUTOS</h5>
                         </Link>
@@ -37,7 +37,7 @@ function Home() {
                 </div>
                 <div className="col-sm col-md-4">
                     <div className="card">
-                        <Link to="/Unidades" className="card-body">
+                        <Link to="/unidades" className="card-body">
                         <img src={UnidadesIcone} className="card-img-top" alt="Unidades Icone"/>
                             <h5 className="card-title">UNIDADES</h5>
                         </Link>
@@ -45,7 +45,7 @@ function Home() {
                 </div>
                     <div className="col-sm col-md-4">
                         <div className="card">
-                        <Link to="/Usuarios" className="card-body">
+                        <Link to="/usuarios" className="card-body">
                         <img src={UsuariosIcone} className="card-img-top" alt="Usuarios Icone"/>
                             <h5 className="card-title">USUÁRIOS</h5>
                         </Link>
@@ -58,26 +58,23 @@ function Home() {
 }
 export default Home
 export const Container = styled.div`
-    margin-top: 10px;
-    font-size: 20px;
-    display: block;
-    column-count: 3;
+flex-direction: row;
+flex-wrap: wrap;
+.card{
+    max-width: 190px;
+    align-content: center;
+    align-items: center;
     
-    .card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        img{
-            max-width: 100px;
-        }
-    }
-    :hover {
-        background: #FF720C;
-        a {
+    :hover{
+        background-color: #FF720C;
+        a{
             color: #fff;
         }
     }
-   
+}
+img{
+    max-width: 100px;
+}
+
 `
 

@@ -3,22 +3,20 @@ import  Navbar  from "./Componentes/navbar/Navbar";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Rotas from "./Rotas";
-import AuthContext from './contexto/AuthContext'
-
-
+import Footer from './Componentes/footer/Footer';
+import AuthProvider from "./contexto/AuthContext";
 
 
 const App = () => {
   return (
-    <AuthContext>
-    <BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
         <ToastContainer />
-          
         <Navbar />
+        <Footer/>
         <Rotas />
-        
-    </BrowserRouter>
-    </AuthContext>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
